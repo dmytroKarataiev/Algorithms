@@ -10,39 +10,34 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  */
 public class Percolation {
 	
-	int[][] percolationGrid;
+	boolean isPercolate;
+	boolean[][] percolationGrid;
 	int length;
-	WeightedQuickUnionUF weUf;
+	WeightedQuickUnionUF quickUnionObject;
 	
 	// create N-by-N grid, with all sites blocked
 	public Percolation(int N) {
 		length = N;
 		
-		// initialize each element of the percolation grid to 0
-		percolationGrid = new int[N][N];
-		for (int i = 0, n = percolationGrid.length; i < n; i++) {
-			for (int j = 0, jn = percolationGrid.length; j < n; j++) {
-				percolationGrid[i][j] = 0;
-			}
-		}
+		// boolean array for efficiency
+		percolationGrid = new boolean[N][N];
 		
 		// TODO: Map 2D grid to 1D data structure
-		weUf = new WeightedQuickUnionUF(N * N + 2);
+		//weUf = new WeightedQuickUnionUF(N * N + 2);
+		quickUnionObject = new WeightedQuickUnionUF(N * N + 2);
 		
-		// Add top and bottom centers
+		// Add top center
 		for (int i = 0; i < N; i++) {
-			weUf.union(0, i);
-			weUf.union(N * N - N + i, N * N + 1);
+			quickUnionObject.union(0, i);
 		}
 		
-		// TODO: 
 	}
 	
 	// open site (row i, column j) if it is not open already
 	public void open(int i, int j) {
 		
 		if (!isOpen(i, j)) {
-			percolationGrid[i - 1][j - 1] = 1;
+			percolationGrid[i - 1][j - 1] = true;
 			connectBlocks(i, j);
 		}
 	}
@@ -54,18 +49,19 @@ public class Percolation {
     		return false;
     	}
     	
-    	if (percolationGrid[i - 1][j - 1] == 1) {
-    		return true;
-    	} else {
-        	return false;
-    	}
+    	return percolationGrid[i - 1][j - 1] == true;
     }
     
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
-    	//System.out.println("Coordintaes: " + i + " " + j);
+    	//System.out.println("Coordinates: " + i + " " + j);
     	
-    	if (isOpen(i, j) && weUf.connected(0, getIndex(i, j))) {
+    	if (isOpen(i, j) && quickUnionObject.connected(0, getIndex(i, j))) {
+    		
+    		if (i == length) {
+    			isPercolate = true;
+    		}
+    		
     		return true;
     	} else {
         	return false;
@@ -75,11 +71,7 @@ public class Percolation {
     
     // does the system percolate?
     public boolean percolates() {
-    	if (weUf.connected(0, length * length + 1)) {
-    		return true;
-    	} else {
-        	return false;
-    	}
+    	return isPercolate;
     }
     
     // test client (optional)
@@ -107,22 +99,20 @@ public class Percolation {
     private void connectBlocks(int i, int j) {
     	
     	if (i > 0 && j > 0 && i <= length && j <= length) {
-    		
-    		if (isOpen(i, j - 1) && j > 1) {
-        		weUf.union(getIndex(i, j), getIndex(i, j - 1));
-    		}
-    		if (isOpen(i, j + 1) && j < length) {
-        		weUf.union(getIndex(i, j), getIndex(i, j + 1));
-    		}
-    		if (isOpen(i - 1, j) && i > 1) {
-        		weUf.union(getIndex(i, j), getIndex(i - 1, j));
-    		}
-    		if (isOpen(i + 1, j) && i < length) {
-        		weUf.union(getIndex(i, j), getIndex(i + 1, j));
-    		}
-    		
-    	}
-    	
+        		
+       		if (isOpen(i, j - 1) && j > 1) {
+           		quickUnionObject.union(getIndex(i, j), getIndex(i, j - 1));
+        	}
+        	if (isOpen(i, j + 1) && j < length) {
+           		quickUnionObject.union(getIndex(i, j), getIndex(i, j + 1));
+       		}
+       		if (isOpen(i - 1, j) && i > 1) {
+           		quickUnionObject.union(getIndex(i, j), getIndex(i - 1, j));
+       		}
+       		if (isOpen(i + 1, j) && i < length) {
+           		quickUnionObject.union(getIndex(i, j), getIndex(i + 1, j));
+       		}
+        }
     }
 	
 }
