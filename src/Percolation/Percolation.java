@@ -10,20 +10,21 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  */
 public class Percolation {
 	
-	boolean isPercolate;
-	boolean[][] percolationGrid;
-	int length;
-	WeightedQuickUnionUF quickUnionObject;
+	private boolean isPercolate;
+	private boolean[][] percolationGrid;
+	private final int length;
+	private WeightedQuickUnionUF quickUnionObject;
 	
 	// create N-by-N grid, with all sites blocked
 	public Percolation(int N) {
+		
+		//System.out.println("N " + N);
 		length = N;
 		
 		// boolean array for efficiency
 		percolationGrid = new boolean[N][N];
 		
-		// TODO: Map 2D grid to 1D data structure
-		//weUf = new WeightedQuickUnionUF(N * N + 2);
+		// UnionFindObject
 		quickUnionObject = new WeightedQuickUnionUF(N * N + 2);
 		
 		// Add top center
@@ -33,12 +34,19 @@ public class Percolation {
 		
 	}
 	
+	// test client (optional)
+    public static void main(String[] args) {
+    	
+    }
+	
 	// open site (row i, column j) if it is not open already
 	public void open(int i, int j) {
 		
 		if (!isOpen(i, j)) {
 			percolationGrid[i - 1][j - 1] = true;
 			connectBlocks(i, j);
+			//System.out.println("Connect " + i + " " + j);
+
 		}
 	}
 	
@@ -47,6 +55,7 @@ public class Percolation {
     	//System.out.println("Coordinates: " + i + " " + j);
     	if (i < 1 || j < 1 || i > length || j > length) {
     		return false;
+    		//throw new IndexOutOfBoundsException("row index i out of bounds: " + i + " " + j);
     	}
     	
     	return percolationGrid[i - 1][j - 1] == true;
@@ -60,6 +69,7 @@ public class Percolation {
     		
     		if (i == length) {
     			isPercolate = true;
+    			//System.out.println("peroclates");
     		}
     		
     		return true;
@@ -74,11 +84,6 @@ public class Percolation {
     	return isPercolate;
     }
     
-    // test client (optional)
-    public static void main(String[] args) {
-    	
-    }
-    
     /**
      * Map Matrix 2D coordinates to array 1D coordinates
      * @param i column index
@@ -86,9 +91,7 @@ public class Percolation {
      * @return matrix 2D index converted to array index
      */
     private int getIndex(int i, int j) {
-    	
     	return (i - 1) * length + j - 1;
-    	
     }
     
     /**
@@ -112,6 +115,8 @@ public class Percolation {
        		if (isOpen(i + 1, j) && i < length) {
            		quickUnionObject.union(getIndex(i, j), getIndex(i + 1, j));
        		}
+        } else {
+        	throw new IndexOutOfBoundsException("row index i out of bounds");
         }
     }
 	
