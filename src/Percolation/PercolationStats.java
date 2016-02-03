@@ -7,17 +7,16 @@ import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
 	   
-	double[] percolations;
-	int[] moves;
-	int experiments;
-	int gridSize;
+	private double[] percolations;
+	//private int[] moves;
+	private int experiments;
+	private int gridSize;
 	
 	// perform T independent experiments on an N-by-N grid
 	public PercolationStats(int N, int T) {
-		System.out.println("args: " + N + " 2: " + T);
 		
 		gridSize = N;
-		moves = new int[N * N];
+		int[] moves = new int[N * N];
 		
 		for (int i = 0; i < N * N; i++) {
 			moves[i] = i;
@@ -30,10 +29,10 @@ public class PercolationStats {
 		for (int i = 0; i < T; i++) {
 			StdRandom.shuffle(moves);
 			Percolation perc = new Percolation(N);
-			int turn = 1;
+			int turn = 0;
 			
 			while (!perc.percolates() && turn < N * N) {
-				//System.out.println("elements: " + firstElement + " " + secondElement + " turn " + turn);
+
 				int row = moves[turn] / N + 1;
 				int column = moves[turn] % N;
 				if (column == 0) column = N;
@@ -72,7 +71,8 @@ public class PercolationStats {
 
 	// test client (described below)
 	public static void main(String[] args) {
-		if (args.length < 2) {
+		
+		if (args.length < 2 || Integer.parseInt(args[0]) <= 0 || Integer.parseInt(args[1]) <= 0) {
     		throw new IllegalArgumentException("check arguments, N <= 0, T <= 0");
 		}
 		

@@ -1,5 +1,3 @@
-package Percolation;
-
 /******************************************************************************
  *  Compilation:  javac PercolationVisualizer.java
  *  Execution:    java PercolationVisualizer input.txt
@@ -30,8 +28,7 @@ public class PercolationVisualizer {
 
     // draw N-by-N percolation system
     public static void draw(Percolation perc, int N) {
-        
-    	StdDraw.clear();
+        StdDraw.clear();
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.setXscale(-.05*N, 1.05*N);
         StdDraw.setYscale(-.05*N, 1.05*N);   // leave a border to write text
@@ -59,16 +56,13 @@ public class PercolationVisualizer {
         StdDraw.setFont(new Font("SansSerif", Font.PLAIN, 12));
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.text(.25*N, -N*.025, opened + " open sites");
-        if (perc.percolates()) { 
-        	StdDraw.text(.75*N, -N*.025, "percolates");
-        } else {
-        	StdDraw.text(.75*N, -N*.025, "does not percolate");
-        }
+        if (perc.percolates()) StdDraw.text(.75*N, -N*.025, "percolates");
+        else                   StdDraw.text(.75*N, -N*.025, "does not percolate");
 
     }
 
     public static void main(String[] args) {
-        In in = new In("jerry47.txt");      // input file
+        In in = new In(args[0]);      // input file
         int N = in.readInt();         // N-by-N percolation system
 
         // turn on animation mode

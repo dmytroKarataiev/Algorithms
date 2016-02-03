@@ -42,6 +42,8 @@ public class Percolation {
 	// open site (row i, column j) if it is not open already
 	public void open(int i, int j) {
 		
+		
+		
 		if (!isOpen(i, j)) {
 			percolationGrid[i - 1][j - 1] = true;
 			connectBlocks(i, j);
@@ -54,8 +56,8 @@ public class Percolation {
     public boolean isOpen(int i, int j) {
     	//System.out.println("Coordinates: " + i + " " + j);
     	if (i < 1 || j < 1 || i > length || j > length) {
-    		return false;
-    		//throw new IndexOutOfBoundsException("row index i out of bounds: " + i + " " + j);
+    		//return false;
+    		throw new IndexOutOfBoundsException("row index i out of bounds: " + i + " " + j);
     	}
     	
     	return percolationGrid[i - 1][j - 1] == true;
@@ -64,6 +66,10 @@ public class Percolation {
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
     	//System.out.println("Coordinates: " + i + " " + j);
+    	if (i < 1 || j < 1 || i > length || j > length) {
+    		//return false;
+    		throw new IndexOutOfBoundsException("row index i out of bounds: " + i + " " + j);
+    	}
     	
     	if (isOpen(i, j) && quickUnionObject.connected(0, getIndex(i, j))) {
     		
@@ -103,16 +109,16 @@ public class Percolation {
     	
     	if (i > 0 && j > 0 && i <= length && j <= length) {
         		
-       		if (isOpen(i, j - 1) && j > 1) {
+       		if (j > 1 && isOpen(i, j - 1)) {
            		quickUnionObject.union(getIndex(i, j), getIndex(i, j - 1));
         	}
-        	if (isOpen(i, j + 1) && j < length) {
+        	if (j < length && isOpen(i, j + 1)) {
            		quickUnionObject.union(getIndex(i, j), getIndex(i, j + 1));
        		}
-       		if (isOpen(i - 1, j) && i > 1) {
+       		if (i > 1 && isOpen(i - 1, j)) {
            		quickUnionObject.union(getIndex(i, j), getIndex(i - 1, j));
        		}
-       		if (isOpen(i + 1, j) && i < length) {
+       		if (i < length && isOpen(i + 1, j)) {
            		quickUnionObject.union(getIndex(i, j), getIndex(i + 1, j));
        		}
         } else {
