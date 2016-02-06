@@ -10,9 +10,10 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  */
 public class Percolation {
 
-    private boolean[][] percolationGrid;
+    private boolean[] percolationGrid;
     private final int length;
     private WeightedQuickUnionUF quickUnionObject, quickUnionObjectSecond;
+
 
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
@@ -22,7 +23,7 @@ public class Percolation {
         length = N;
 
         // boolean array for efficiency
-        percolationGrid = new boolean[N][N];
+        percolationGrid = new boolean[N * N];
 
         // UnionFindObject
         quickUnionObject = new WeightedQuickUnionUF(N * N + 2);
@@ -46,7 +47,7 @@ public class Percolation {
     public void open(int i, int j) {
 
         if (!isOpen(i, j)) {
-            percolationGrid[i - 1][j - 1] = true;
+            percolationGrid[get1dIndex(i, j)] = true;
             connectBlocks(i, j);
         }
     }
@@ -57,7 +58,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException("row index i out of bounds: " + i + " " + j);
         }
 
-        return percolationGrid[i - 1][j - 1];
+        return percolationGrid[get1dIndex(i, j)];
     }
 
     // is site (row i, column j) full?
@@ -73,7 +74,7 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates() {
         if (length == 1) {
-            return percolationGrid[0][0];
+            return percolationGrid[0];
         } else {
             return quickUnionObjectSecond.connected(0, length * length + 1);
         }
@@ -122,6 +123,16 @@ public class Percolation {
         } else {
             throw new IndexOutOfBoundsException("row index i out of bounds");
         }
+    }
+
+    /**
+     * Method to map 2D coordinates to 1D array
+     * @param i row
+     * @param j column
+     * @return 1D coordinate
+     */
+    private int get1dIndex(int i, int j) {
+        return (i * length - (length - j)) - 1;
     }
 
 }
