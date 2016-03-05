@@ -83,8 +83,9 @@ public class PercolationVisualizer {
             draw(perc, N);
             StdDraw.show(DELAY);
             System.out.println("move: " + iter + ", site: " + i + " " + j + ", isOpen " + perc.isOpen(i, j) + ", percolates: "
-                    + perc.percolates() + ", isFull: " + perc.isFull(i, j));
+                    + perc.percolates() + ", isFull: " + perc.isFull(i, j) + " percolates boolean " + perc.isPercolates);
             iter++;
         }
+        perc.checkEach();
     }
 }

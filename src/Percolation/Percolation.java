@@ -14,6 +14,11 @@ public class Percolation {
     private final int length;
     private WeightedQuickUnionUF quickUnionObject, quickUnionObjectSecond;
 
+    // status array to check if open, full, connected
+    private int[] status;
+
+    // boolean flag to chech if percolates
+    public boolean isPercolates;
 
     // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
@@ -24,6 +29,9 @@ public class Percolation {
 
         // boolean array for efficiency
         percolationGrid = new boolean[N * N];
+
+        // temporary status array
+        status = new int[N * N];
 
         // UnionFindObject
         quickUnionObject = new WeightedQuickUnionUF(N * N + 2);
@@ -49,6 +57,18 @@ public class Percolation {
         if (!isOpen(i, j)) {
             percolationGrid[get1dIndex(i, j)] = true;
             connectBlocks(i, j);
+
+            // 1 - open, 2 - full, 3 - connected to bottom, 4 - open and bottom
+            status[get1dIndex(i, j)] = 1;
+            // set status in status array
+            if (i == 1) {
+                status[get1dIndex(i, j)] = 2;
+            } else if (i == length && status[get1dIndex(i, j)] != 2) {
+                status[get1dIndex(i, j)] = 3;
+            } else if (i == length && status[get1dIndex(i, j)] == 2) {
+                status[get1dIndex(i, j)] = 4;
+                isPercolates = true;
+            }
         }
     }
 
@@ -133,6 +153,13 @@ public class Percolation {
      */
     private int get1dIndex(int i, int j) {
         return (i * length - (length - j)) - 1;
+    }
+
+    public void checkEach() {
+        for (int i = 0; i < status.length; i++) {
+            System.out.print(status[i] + " ");
+        }
+        System.out.print("\n");
     }
 
 }
