@@ -22,20 +22,41 @@
  * SOFTWARE.
  */
 
+package Greedy.change;
+
+import java.util.Scanner;
+
 /**
- * Test test test.
- * @author karataev.
+ * Finds the minimum number of coins needed to change the given amount
+ * of money using coins with different denominations.
  */
-public class MainActivity {
+public class Change {
 
     /**
-     * @param args arguments to start program with
+     * Calculates the least number of coins for your value
+     * @param n amount in cents
+     * @return number of coins
      */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		return;
+    private static int getChange(int n) {
 
-	}
+        int numberCoins = 0;
 
+        int[] coins = { 25, 10, 5, 1 };
+
+        for (int coin : coins) {
+            numberCoins += n / coin;
+            n = n - n / coin * coin;
+        }
+
+        return numberCoins;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        System.out.println(getChange(n));
+
+    }
 }
+
