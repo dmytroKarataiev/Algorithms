@@ -12,6 +12,6 @@
 hs_err_pid*
 /bin/
 
-./idea
+.idea
 .DS_Store
 *.idea

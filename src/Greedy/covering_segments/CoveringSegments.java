@@ -24,17 +24,34 @@
 
 package Greedy.covering_segments;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class CoveringSegments {
 
     private static int[] optimalPoints(Segment[] segments) {
-        //write your code here
-        int[] points = new int[2 * segments.length];
-        for (int i = 0; i < segments.length; i++) {
-            points[2 * i] = segments[i].start;
-            points[2 * i + 1] = segments[i].end;
+
+        int[] points = new int[segments.length];
+
+        int left = -1;
+
+        for (int i = 0, n = segments.length; i < n; i++) {
+            int right = 999999999;
+
+            for (Segment each : segments) {
+
+                if (each.end <= right && each.start > left) {
+
+                    right = each.end;
+                    points[i] = right;
+                    //System.out.println("left: " + left + ", right: " + right);
+                }
+
+            }
+            //System.out.println("2 left: " + left + ", right: " + right);
+            left = right;
+
         }
+
         return points;
     }
 
@@ -57,10 +74,20 @@ public class CoveringSegments {
             segments[i] = new Segment(start, end);
         }
         int[] points = optimalPoints(segments);
-        System.out.println(points.length);
+
+//        System.out.println(points.length);
+
+        StringBuilder stringBuilder = new StringBuilder(points.length);
+        int length = 0;
         for (int point : points) {
-            System.out.print(point + " ");
+            if (point != 0) {
+                length++;
+                stringBuilder.append(point);
+                stringBuilder.append(" ");
+            }
         }
+        System.out.println(length);
+        System.out.println(stringBuilder.toString());
     }
 }
  
