@@ -26,32 +26,32 @@ package Greedy.covering_segments;
 
 import java.util.Scanner;
 
+/**
+ * Given a set of n segments {[a0, b0], [a1, b1], . . . , [an−1, bn−1]} with integer coordinates on a line, find
+ * the minimum number m of points such that each segment contains at least one point.
+ * That is, find a set of integers X of the minimum size such that for any
+ * segment [ai, bi] there is a point x ∈ X such that ai ≤ x ≤ bi.
+ */
 public class CoveringSegments {
 
     private static int[] optimalPoints(Segment[] segments) {
 
         int[] points = new int[segments.length];
-
         int left = -1;
 
         for (int i = 0, n = segments.length; i < n; i++) {
             int right = 999999999;
 
             for (Segment each : segments) {
-
                 if (each.end <= right && each.start > left) {
-
                     right = each.end;
                     points[i] = right;
                     //System.out.println("left: " + left + ", right: " + right);
                 }
-
             }
             //System.out.println("2 left: " + left + ", right: " + right);
             left = right;
-
         }
-
         return points;
     }
 
@@ -74,8 +74,6 @@ public class CoveringSegments {
             segments[i] = new Segment(start, end);
         }
         int[] points = optimalPoints(segments);
-
-//        System.out.println(points.length);
 
         StringBuilder stringBuilder = new StringBuilder(points.length);
         int length = 0;
