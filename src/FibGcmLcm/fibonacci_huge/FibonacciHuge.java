@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-package fibonacci_huge;
+package FibGcmLcm.fibonacci_huge;
 
 import java.util.*;
 
 /**
  * Advanced Problem: Huge Fibonacci Number modulo m
- * Primitive implementation with calculating each fibonacci in iterative way (way too long)
+ * Primitive implementation with calculating each FibGcmLcm.fibonacci in iterative way (way too long)
  */
 public class FibonacciHuge {
 
@@ -61,7 +61,7 @@ public class FibonacciHuge {
     }
 
     /**
-     * Method to calculate fibonacci numbers
+     * Method to calculate FibGcmLcm.fibonacci numbers
      *
      * @param n with constraints 0 <= n <= 45.
      * @return calculated fib number

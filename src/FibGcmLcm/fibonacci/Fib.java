@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package fibonacci;
+package FibGcmLcm.fibonacci;
 
 import java.util.Scanner;
 
@@ -32,7 +32,7 @@ import java.util.Scanner;
 public class Fib {
 
     /**
-     * Method to calculate fibonacci numbers
+     * Method to calculate FibGcmLcm.fibonacci numbers
      * @param n with constraints 0 <= n <= 45.
      * @return calculated fib number
      */

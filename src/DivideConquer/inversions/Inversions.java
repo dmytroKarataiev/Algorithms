@@ -22,41 +22,31 @@
  * SOFTWARE.
  */
 
-package gcd;
-
 import java.util.*;
 
-/**
- * Algorithm to calculate greatest common divisor.
- */
-public class GCD {
+public class Inversions {
 
-    /**
-     * Method to calculate the Greatest Common Divisor using Euclid algorithm
-     * Constraints: 1 <= a, b <= 2 * 10^9
-     * @param a first number
-     * @param b second number
-     * @return GCD of a and b
-     */
-    private static int gcd(int a, int b) {
-
-        if (a < 1 || b < 0 || a > 2e9 || b > 2e9) {
-            return -1;
+    private static long getNumberOfInversions(int[] a, int[] b, int left, int right) {
+        long numberOfInversions = 0;
+        if (right <= left + 1) {
+            return numberOfInversions;
         }
-
-        if (b == 0) {
-            return a;
-        }
-
-        return gcd(b, a % b);
-
+        int ave = (left + right) / 2;
+        numberOfInversions += getNumberOfInversions(a, b, left, ave);
+        numberOfInversions += getNumberOfInversions(a, b, ave, right);
+        //write your code here
+        return numberOfInversions;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-
-        System.out.println(gcd(a, b));
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        int[] b = new int[n];
+        System.out.println(getNumberOfInversions(a, b, 0, a.length));
     }
 }
+

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package fibonacci_huge;
+package FibGcmLcm.fibonacci_huge;
 
 import java.util.Scanner;
 
@@ -36,7 +36,7 @@ import java.util.Scanner;
 public class FibonacciSquare {
 
     /**
-     * Method to calculate fibonacci using exponentiation by squaring
+     * Method to calculate FibGcmLcm.fibonacci using exponentiation by squaring
      * @param n power
      * @return Fibonacci mod
      */
@@ -57,7 +57,7 @@ public class FibonacciSquare {
 
     /**
      * Recursive exponentiation method
-     * @param fibMatrix fibonacci matrix
+     * @param fibMatrix FibGcmLcm.fibonacci matrix
      * @param power to which exponentiation should be made
      */
     private static void power(long fibMatrix[][], long power, long mod) {

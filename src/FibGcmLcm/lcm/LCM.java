@@ -22,46 +22,57 @@
  * SOFTWARE.
  */
 
-package fibonacci_last_digit;
+package FibGcmLcm.lcm;
 
 import java.util.*;
 
 /**
- * Algorithm to find the last digit of a large fibonacci number.
+ * Least Common Multiple algorithm
  */
-public class FibonacciLastDigit {
+public class LCM {
 
     /**
-     * Method to calculate the last digit of a fibonacci number.
-     * @param n with constraints 0 <= n <= 10^7
-     * @return last digit of the fib number
+     * Method to calculate the least common multiple.
+     * Constraints: 1 <= a, b <= 2 * 10^9
+     * @param a first number
+     * @param b second number
+     * @return least common multiple of a and b
      */
-    private static int getFibonacciLastDigit(int n) {
+    private static long lcm(int a, int b) {
 
-        if (n < 0 || n > 10e7) {
+        if (a < 1 || b < 1 || a > 2e9 || b > 2e9) {
             return -1;
         }
 
-        if (n <= 1) {
-            return n;
-        }
-
-        int[] sum = new int[n + 1];
-        sum[0] = 0;
-        sum[1] = 1;
-
-        for (int i = 2; i <= n; i++) {
-            sum[i] = (sum[i - 1] + sum[i - 2]) % 10;
-        }
-
-        return sum[n];
+        return ((long) a * b) / gcd(a, b);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Method to calculate the Greatest Common Divisor using Euclid algorithm
+     * Constraints: 1 <= a, b <= 2 * 10^9
+     * @param a first number
+     * @param b second number
+     * @return GCD of a and b
+     */
+    private static int gcd(int a, int b) {
+
+        if (a < 1 || b < 0 || a > 2e9 || b > 2e9) {
+            return -1;
+        }
+
+        if (b == 0) {
+            return a;
+        }
+
+        return gcd(b, a % b);
+
+    }
+
+    public static void main(String args[]) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int c = getFibonacciLastDigit(n);
-        System.out.println(c);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+
+        System.out.println(lcm(a, b));
     }
 }
-
