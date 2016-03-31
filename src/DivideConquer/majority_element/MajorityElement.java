@@ -22,19 +22,60 @@
  * SOFTWARE.
  */
 
+package DivideConquer.majority_element;
+
 import java.util.*;
 import java.io.*;
 
+/**
+ * Algorithm to calculate majority element in an array.
+ * It works in O(n Log n) and returns either a majority element or -1 if it's not present.
+ */
 public class MajorityElement {
+
     private static int getMajorityElement(int[] a, int left, int right) {
-        if (left == right) {
+
+        if (left > right) {
+            return -1;
+        } else if (left == right) {
+            return a[left];
+        } else {
+
+            int median = (left + right) / 2;
+
+            int one = getMajorityElement(a, left, median);
+            int two = getMajorityElement(a, median + 1, right);
+            if (one == two) {
+                return one;
+            }
+
+            int half = (right - left + 1) / 2;
+
+            if (one > -1) {
+                if (getFrequency(a, left, right, one) > half) {
+                    return one;
+                }
+            }
+            if (two > -1) {
+                if (getFrequency(a, left, right, two) > half) {
+                    return two;
+                }
+            }
             return -1;
         }
-        if (left + 1 == right) {
-            return a[left];
+
+    }
+
+    private static int getFrequency(int[] a, int left, int right, int element) {
+        int frequency = 0;
+
+        for (int i = left; i <= right; i++) {
+            if (a[i] == element) {
+                frequency++;
+            }
         }
-        //write your code here
-        return -1;
+
+        return frequency;
     }
 
     public static void main(String[] args) {
@@ -44,7 +85,10 @@ public class MajorityElement {
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
-        if (getMajorityElement(a, 0, a.length) != -1) {
+
+        //System.out.println(getMajorityElement(a, 0, a.length - 1));
+
+        if (getMajorityElement(a, 0, a.length - 1) != -1) {
             System.out.println(1);
         } else {
             System.out.println(0);
