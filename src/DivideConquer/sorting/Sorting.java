@@ -22,36 +22,77 @@
  * SOFTWARE.
  */
 
-import java.io.*;
-import java.util.*;
+package DivideConquer.sorting;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Random;
+import java.util.StringTokenizer;
+
+/**
+ * 3 way partitioning Randomized Quick Sort
+ */
 public class Sorting {
     private static Random random = new Random();
 
+    /**
+     * 3 way partitioning
+     * @param a initial array
+     * @param l leftmost element
+     * @param r rightmost element
+     * @return 2 pivot elements
+     */
     private static int[] partition3(int[] a, int l, int r) {
-      //write your code here
+        int x = a[l];
+        int lt = l;
+        int gt = r;
 
+        // two options: either while loop, or for loop
+//        int i = l;
+//        while (i <= gt) {
+//            if (a[i] < x) {
+//                swap(a, lt++, i++);
+//            } else if (a[i] > x) {
+//                swap(a, i, gt--);
+//            } else {
+//                i++;
+//            }
+//        }
 
-      int m1 = l;
-      int m2 = r;
-      int[] m = {m1, m2};
-      return m;
+        for (int i = l; i <= gt; ) {
+            if (a[i] < x) {
+                swap(a, lt++, i++);
+            } else if (a[i] > x) {
+                swap(a, i, gt--);
+            } else {
+                i++;
+            }
+        }
+
+        return new int[] { lt, gt };
     }
 
+    /**
+     * 2 way partitioning
+     * @param a initial array
+     * @param l leftmost element
+     * @param r rightmost element
+     * @return pivot element
+     */
     private static int partition2(int[] a, int l, int r) {
         int x = a[l];
         int j = l;
+
         for (int i = l + 1; i <= r; i++) {
             if (a[i] <= x) {
                 j++;
-                int t = a[i];
-                a[i] = a[j];
-                a[j] = t;
+                swap(a, i, j);
             }
         }
-        int t = a[l];
-        a[l] = a[j];
-        a[j] = t;
+
+        swap(a, l, j);
         return j;
     }
 
@@ -63,10 +104,19 @@ public class Sorting {
         int t = a[l];
         a[l] = a[k];
         a[k] = t;
-        //use partition3
-        int m = partition2(a, l, r);
-        randomizedQuickSort(a, l, m - 1);
-        randomizedQuickSort(a, m + 1, r);
+
+        int[] m = partition3(a, l, r);
+        randomizedQuickSort(a, l, m[0] - 1);
+        randomizedQuickSort(a, m[1] + 1, r);
+    }
+
+    private static void swap(int[] array, int l, int j) {
+        
+        System.out.println("swap: " + l + " " + j);
+        
+        int t = array[l];
+        array[l] = array[j];
+        array[j] = t;
     }
 
     public static void main(String[] args) {

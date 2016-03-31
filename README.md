@@ -12,10 +12,12 @@
 * [GCD](src/FibGcmLcm.gcd), [LCM](src/FibGcmLcm.lcm)
 * [Money change, covering segments, different summands, fractional knapsack](src/Greedy)
 * [Binary Search](src/DivideConquer/binary_search)
+* [3 Way partitioning QuickSort](src/DivideConquer/sorting)
 
 ### Medium
 * [Weighted Union Find algorithm to solve physical problem of movement and filtering of fluids through porous materials](src/Percolation)
 * [Fibonacci huge mod m](src/FibGcmLcm.fibonacci_huge)
+* [Majority Element](src/DivideConquer/majority_element)
 
 ## Future development
 * Most common sorting, searching algorithms.
