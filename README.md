@@ -13,6 +13,7 @@
 * [Money change, covering segments, different summands, fractional knapsack](src/Greedy)
 * [Binary Search](src/DivideConquer/binary_search)
 * [3 Way partitioning QuickSort](src/DivideConquer/sorting)
+* [FizzBuzz](src/fizzbuzz)
 
 ### Medium
 * [Weighted Union Find algorithm to solve physical problem of movement and filtering of fluids through porous materials](src/Percolation)
