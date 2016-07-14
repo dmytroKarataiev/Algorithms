@@ -20,6 +20,11 @@
 * [Fibonacci huge mod m](src/FibGcmLcm.fibonacci_huge)
 * [Majority Element](src/DivideConquer/majority_element)
 
+## HackerRank Algorithms
+* [Stack, Heap - Max Element](src/hackerrank/HeapMaxElement.java)
+* [Queue - Jesse and Cookies](src/hackerrank/JesseCookies.java)
+* [Sparse Arrays - Words counter](src/hackerrank/SparseArr.java)
+
 ## Future development
 * Most common sorting, searching algorithms.
 * Data Structures.
