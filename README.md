@@ -8,7 +8,7 @@
 
 ### Easy
 * [Sum a + b](src/a_plus_b)
-* [Fibonacci](src/FibGcmLcm/fibonacci), [Fibonacci last digit.](src/GibGcmLcm/fibonacci_last_digit)
+* [Fibonacci](src/FibGcmLcm/fibonacci), [Fibonacci last digit.](src/FibGcmLcm/fibonacci_last_digit)
 * [GCD](src/FibGcmLcm/gcd), [LCM](src/FibGcmLcm/lcm)
 * [Money change, covering segments, different summands, fractional knapsack](src/Greedy)
 * [Binary Search](src/DivideConquer/binary_search)
@@ -25,6 +25,8 @@
 * [Queue - Jesse and Cookies](src/hackerrank/JesseCookies.java)
 * [Sparse Arrays - Words counter](src/hackerrank/SparseArr.java)
 * [Stack, HashMap - Balanced Parenthesis](src/hackerrank/BalancedParent.java)
+* [Heap Min, Heap Max - Running median](src/hackerrank/HeapRunningMedian.java)
+* [Trie - HashMap, Contacts Search](src/hackerrank/DictionarySearch.java)
 
 ## Future development
 * Most common sorting, searching algorithms.
