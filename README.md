@@ -28,6 +28,7 @@
 * [Heap Min, Heap Max - Running median](src/hackerrank/HeapRunningMedian.java)
 * [Trie - HashMap, Contacts Search](src/hackerrank/DictionarySearch.java)
 * [Queue - Count Min Moves to Zero](src/hackerrank/CountMinMoves.java)
+* [Stack - Text Editor](src/hackerrank/TextEditor.java)
 
 ## Future development
 * Most common sorting, searching algorithms.
