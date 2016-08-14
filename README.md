@@ -15,6 +15,8 @@
 * [3 Way partitioning QuickSort](src/DivideConquer/sorting)
 * [FizzBuzz](src/fizzbuzz)
 * [Pascal Triangle](src/hackerrank/PascalTriangle.java)
+* [CamelCase calculator - number of words](src/hackerrank/CamelCase.java).
+* [String pangram](src/hackerrank/Pangram.java).
 
 ### Medium
 * [Weighted Union Find algorithm to solve physical problem of movement and filtering of fluids through porous materials](src/Percolation)
